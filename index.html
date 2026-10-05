@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Morgan — Minimalist Developer & Designer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and subtle transitions */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+            color: #171717;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-neutral-200 selection:text-neutral-900">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-[#fafafa]/80 backdrop-blur-md border-b border-neutral-200/60">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#home" onclick="switchTab('home')" class="font-semibold text-neutral-900 tracking-tight hover:text-neutral-600 transition-colors flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-neutral-900"></span>
+                <span>Alex Morgan</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-1 text-sm font-medium text-neutral-600">
+                <button onclick="switchTab('home')" id="nav-home" class="px-4 py-2 rounded-full hover:text-neutral-900 hover:bg-neutral-200/50 transition-all text-neutral-900 bg-neutral-200/70">Home</button>
+                <button onclick="switchTab('about')" id="nav-about" class="px-4 py-2 rounded-full hover:text-neutral-900 hover:bg-neutral-200/50 transition-all">About Me</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="px-4 py-2 rounded-full hover:text-neutral-900 hover:bg-neutral-200/50 transition-all">Projects</button>
+                <button onclick="switchTab('contact')" id="nav-contact" class="px-4 py-2 rounded-full hover:text-neutral-900 hover:bg-neutral-200/50 transition-all">Contact</button>
+            </nav>
+
+            <!-- Resume Download Button (Header) -->
+            <div class="hidden md:block">
+                <button onclick="downloadResume()" class="text-xs font-medium uppercase tracking-wider bg-neutral-900 text-white px-4 py-2 rounded-full hover:bg-neutral-800 transition-all shadow-sm flex items-center gap-1.5">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    Resume
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-neutral-700 hover:text-neutral-900 focus:outline-none">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-neutral-200 bg-white px-6 py-4 space-y-2 shadow-lg">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-neutral-100 font-medium text-neutral-900">Home</button>
+            <button onclick="switchTab('about'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-neutral-100 font-medium text-neutral-700">About Me</button>
+            <button onclick="switchTab('projects'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-neutral-100 font-medium text-neutral-700">Projects</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-neutral-100 font-medium text-neutral-700">Contact</button>
+            <div class="pt-2 border-t border-neutral-100">
+                <button onclick="downloadResume()" class="w-full text-center text-xs font-medium uppercase tracking-wider bg-neutral-900 text-white py-2.5 rounded-lg hover:bg-neutral-800 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    Download Resume
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-12 md:py-20 w-full">
+
+        <!-- HOME SECTION -->
+        <section id="section-home" class="tab-content fade-in space-y-16">
+            <div class="space-y-6 max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-200/60 border border-neutral-300/50 text-xs font-medium text-neutral-700">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Available for freelance & full-time roles
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
+                    Crafting minimal interfaces & scalable web apps.
+                </h1>
+                <p class="text-lg text-neutral-600 leading-relaxed font-light">
+                    Hi, I'm Alex. A frontend developer and UI/UX enthusiast focused on writing clean, modular code and building digital products with thoughtful aesthetics.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <button onclick="switchTab('projects')" class="bg-neutral-900 text-white font-medium px-6 py-3 rounded-full hover:bg-neutral-800 transition-all shadow-sm flex items-center gap-2 text-sm">
+                        Explore Projects
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="switchTab('contact')" class="bg-white border border-neutral-300 text-neutral-800 font-medium px-6 py-3 rounded-full hover:bg-neutral-50 transition-all text-sm">
+                        Get in Touch
+                    </button>
+                </div>
+            </div>
+
+            <!-- Featured Highlights Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-neutral-200/80">
+                <div class="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-800">
+                        <i data-lucide="code" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-semibold text-neutral-900">Clean Code</h3>
+                    <p class="text-sm text-neutral-500 leading-relaxed">Developing semantic, accessible, and high-performance modern web applications.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-800">
+                        <i data-lucide="layout" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-semibold text-neutral-900">Minimal UI</h3>
+                    <p class="text-sm text-neutral-500 leading-relaxed">Prioritizing whitespace, typography, and purposeful layouts over visual clutter.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-800">
+                        <i data-lucide="smartphone" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-semibold text-neutral-900">Fully Responsive</h3>
+                    <p class="text-sm text-neutral-500 leading-relaxed">Fluid layouts rigorously tested for seamless viewing on phones, tablets, and desktops.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="section-about" class="tab-content hidden fade-in space-y-12">
+            <div class="space-y-4 max-w-2xl">
+                <h2 class="text-3xl font-bold tracking-tight text-neutral-900">About Me</h2>
+                <p class="text-neutral-600 text-base leading-relaxed font-light">
+                    I am a self-driven web developer with a passion for minimalism, typography, and intuitive user experiences. My journey started with tweaking HTML templates and evolved into architecting full-stack applications with modern frameworks.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-neutral-900">My Background</h3>
+                    <p class="text-neutral-600 text-sm leading-relaxed">
+                        Over the past 3+ years, I’ve collaborated with early-stage startups and creative agencies to ship responsive web apps, interactive landing pages, and robust design systems. I believe in continuous learning and keeping codebases lean and maintainable.
+                    </p>
+                    <div class="p-5 bg-white border border-neutral-200 rounded-2xl space-y-3 shadow-xs">
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400">Core Principles</h4>
+                        <ul class="space-y-2 text-sm text-neutral-700">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-neutral-900"></i> Simplicity over complexity</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-neutral-900"></i> User-first accessibility & semantics</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-neutral-900"></i> Performance budget mindfulness</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-neutral-900">Technical Skills</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5 font-medium text-neutral-700">
+                                <span>HTML5 / Semantic Markup</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="w-full bg-neutral-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-neutral-900 h-full rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5 font-medium text-neutral-700">
+                                <span>Tailwind CSS & Modern Styling</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="w-full bg-neutral-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-neutral-900 h-full rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5 font-medium text-neutral-700">
+                                <span>JavaScript (ES6+) / React</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-neutral-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-neutral-900 h-full rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5 font-medium text-neutral-700">
+                                <span>Git & Version Control</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="w-full bg-neutral-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-neutral-900 h-full rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="section-projects" class="tab-content hidden fade-in space-y-10">
+            <div class="space-y-4 max-w-2xl">
+                <h2 class="text-3xl font-bold tracking-tight text-neutral-900">Featured Projects</h2>
+                <p class="text-neutral-600 text-base leading-relaxed font-light">
+                    A curated selection of recent web apps, open-source tools, and client interfaces built with attention to detail and performance.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 shadow-xs hover:border-neutral-300 transition-all flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium px-2.5 py-1 bg-neutral-100 text-neutral-700 rounded-md">Web App</span>
+                            <div class="flex items-center gap-2">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://example.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral-900">Minimalist Note Engine</h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            A distraction-free markdown note-taking app featuring local storage sync, dark/light mode toggle, and lightning-fast search indexing.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">JavaScript</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">Tailwind CSS</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">LocalStorage API</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 shadow-xs hover:border-neutral-300 transition-all flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium px-2.5 py-1 bg-neutral-100 text-neutral-700 rounded-md">Dashboard</span>
+                            <div class="flex items-center gap-2">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://example.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral-900">Analytics Minimal Dashboard</h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            A clean financial metrics tracker with custom SVG charts, responsive tables, and clean data export utilities.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">React</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">Tailwind CSS</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">Chart.js</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 shadow-xs hover:border-neutral-300 transition-all flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium px-2.5 py-1 bg-neutral-100 text-neutral-700 rounded-md">E-Commerce</span>
+                            <div class="flex items-center gap-2">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://example.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral-900">Aura Typography Storefront</h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            An e-commerce concept for independent type foundries featuring fluid grid layouts and seamless cart drawers.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">HTML5</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">CSS Grid</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">Vanilla JS</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 shadow-xs hover:border-neutral-300 transition-all flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium px-2.5 py-1 bg-neutral-100 text-neutral-700 rounded-md">Open Source</span>
+                            <div class="flex items-center gap-2">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://example.com" target="_blank" rel="noopener" class="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral-900">Micro CSS Utility Kit</h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            A featherweight helper class library designed for rapid prototyping without heavy framework overhead.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">CSS3</span>
+                        <span class="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded">PostCSS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="section-contact" class="tab-content hidden fade-in space-y-10">
+            <div class="space-y-4 max-w-2xl">
+                <h2 class="text-3xl font-bold tracking-tight text-neutral-900">Let's Work Together</h2>
+                <p class="text-neutral-600 text-base leading-relaxed font-light">
+                    Have a project in mind, a question, or just want to say hi? Send me a message below or reach out directly at <span class="font-medium text-neutral-900">alex.morgan@example.com</span>.
+                </p>
+            </div>
+
+            <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 sm:p-8 shadow-xs max-w-2xl">
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <div class="space-y-2">
+                        <label for="name" class="block text-sm font-medium text-neutral-700">Your Name</label>
+                        <input type="text" id="name" required class="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white text-sm transition-all" placeholder="Jane Doe">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-medium text-neutral-700">Email Address</label>
+                        <input type="email" id="email" required class="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white text-sm transition-all" placeholder="jane@example.com">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="message" class="block text-sm font-medium text-neutral-700">Your Message</label>
+                        <textarea id="message" rows="4" required class="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white text-sm transition-all resize-none" placeholder="Tell me about your project..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full bg-neutral-900 text-white font-medium py-3 px-6 rounded-xl hover:bg-neutral-800 transition-all text-sm flex items-center justify-center gap-2 shadow-sm">
+                        <span>Send Message</span>
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+
+                <!-- Success Message Feedback -->
+                <div id="form-success" class="hidden mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                    <div>
+                        <span class="font-semibold block">Message sent successfully!</span>
+                        Thank you for reaching out. I'll get back to you within 24 hours.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-200 bg-white/50 py-8 mt-12">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
+            <p>© 2026 Alex Morgan. Built with semantic HTML & Tailwind CSS.</p>
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com" target="_blank" rel="noopener" class="hover:text-neutral-900 transition-colors flex items-center gap-1">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-neutral-900 transition-colors flex items-center gap-1">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" class="hover:text-neutral-900 transition-colors flex items-center gap-1">
+                    <i data-lucide="twitter" class="w-4 h-4"></i> Twitter
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Show selected tab content
+            const activeTab = document.getElementById(`section-${tabId}`);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+
+            // Update Desktop Nav styles
+            const navButtons = document.querySelectorAll('header nav button');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-neutral-200/70', 'text-neutral-900');
+                btn.classList.add('text-neutral-600');
+            });
+
+            const currentNav = document.getElementById(`nav-${tabId}`);
+            if (currentNav) {
+                currentNav.classList.remove('text-neutral-600');
+                currentNav.classList.add('bg-neutral-200/70', 'text-neutral-900');
+            }
+
+            // Scroll to top smoothly on tab switch
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            
+            // Toggle icon state
+            if (menu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        }
+
+        // Resume Download Simulation
+        function downloadResume() {
+            // Create a sample PDF blob or trigger mock download
+            const resumeContent = `%PDF-1.4
+1 0 obj
+<< /Title (Alex Morgan Resume) /Author (Alex Morgan) /Creator (Minimal Portfolio) >>
+endobj
+2 0 obj
+<< /Length 44 >>
+stream
+Alex Morgan - Frontend Developer Resume
+Skills: HTML, Tailwind CSS, JavaScript, React.
+endstream
+endobj
+xref
+0 3
+0000000000 65535 f 
+0000000009 00000 n 
+0000000096 00000 n 
+trailer
+<< /Size 3 /Root 1 0 R >>
+startxref
+167
+%%EOF`;
+
+            const blob = new Blob([resumeContent], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Alex_Morgan_Resume.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Contact Form Mock Submission
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const successBox = document.getElementById('form-success');
+            const form = document.getElementById('contact-form');
+
+            // Disable button and show sending state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Sending...</span><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>`;
+            lucide.createIcons();
+
+            setTimeout(() => {
+                // Reset form inputs
+                form.reset();
+                
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Send Message</span><i data-lucide="send" class="w-4 h-4"></i>`;
+                lucide.createIcons();
+
+                // Show success feedback
+                successBox.classList.remove('hidden');
+
+                // Hide success message after 6 seconds
+                setTimeout(() => {
+                    successBox.classList.add('hidden');
+                }, 6000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
